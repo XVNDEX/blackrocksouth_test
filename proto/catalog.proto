@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option go_package = "../pb";
+
+message Product {
+  uint32 id = 1;
+  uint32 price = 2;
+  uint32 qty = 3;
+  string name = 4;
+}
+
+message GetCatalogRequest {}
+
+message GetCatalogResponse {
+  repeated Product products = 1;
+}
+
+message GetProductRequest {
+  uint32 id = 1;
+}
+
+message GetProductResponse {
+  Product product = 1;
+  double btc_price = 2;
+  double eth_price = 3;
+}
+
+message ConvertCurrencyRequest {
+  uint32 price = 1;
+  string currency = 2;
+}
+
+message ConvertCurrencyResponse {
+  double price = 1;
+}
+
+service Catalog {
+  rpc GetProducts(GetCatalogRequest) returns (GetCatalogResponse) {};
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse) {};
+  rpc ConvertCurrency(ConvertCurrencyRequest) returns (ConvertCurrencyResponse) {};
+}

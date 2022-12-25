@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "../pb";
+
+message SignInUserInput {
+  string login = 1;
+  string pwd = 2;
+}
+
+message SignInUserResponse {
+  string token = 1;
+}
+
+service AuthService {
+  rpc SignInUser(SignInUserInput) returns (SignInUserResponse) {}
+}
